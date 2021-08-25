@@ -9,7 +9,7 @@
 
 import Foundation
 
-struct WeatherData: Decodable {
+struct WeatherData: Codable {
     
     // you need to name the properties as the same name and type that the JSON data
     let name: String
@@ -18,11 +18,12 @@ struct WeatherData: Decodable {
     
 }
 
-struct Main: Decodable {
+struct Main: Codable {
     let temp: Double
 }
 
-struct Weather: Decodable {
+struct Weather: Codable {
+    let id: Int
     let description: String
 }
 

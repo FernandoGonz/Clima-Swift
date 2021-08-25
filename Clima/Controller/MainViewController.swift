@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITextFieldDelegate {
+class MainViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
 
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var conditionImageView: UIImageView!
@@ -20,6 +20,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // delegamos esta clase frente weather Manager class
+        weatherManager.delegate = self
         
         searchTextField.delegate = self
     }
@@ -63,6 +66,16 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             print("False validating")
             return false
         }
+    }
+    
+    // weatherManager who Notifies to MainViewController
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        print("Im here on didUpdate")
+        print(weather.temperatureString)
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
     }
 
 }
