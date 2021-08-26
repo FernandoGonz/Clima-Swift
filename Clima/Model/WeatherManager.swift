@@ -4,8 +4,10 @@
 //
 //  Created by Fernando González on 23/08/21.
 //
+//  api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 
 import Foundation
+import CoreLocation
 // Por convención en Swift, el protocolo va en la misma clase que notificará al delegado
 protocol WeatherManagerDelegate {
     // weatherManager who notifies to a delegate class
@@ -25,6 +27,14 @@ struct WeatherManager {
     func fetchWeather(cityName: String) {
         
         let urlString = "\(self.weatherURL)&q=\(cityName)"
+        
+        self.performRequest(urlString: urlString)
+    }
+    
+    /** Method that allow us fetching Weather by longitude: Double and latitude: Double from OpenWeather */
+    func fetchWeather(longitude: CLLocationDegrees, latitude: CLLocationDegrees) {
+        
+        let urlString = "\(self.weatherURL)&lat=\(latitude)&lon=\(longitude)"
         
         self.performRequest(urlString: urlString)
     }
